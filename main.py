@@ -21,13 +21,15 @@ def search(input: str) -> str:
 
 tools = [search]
 
-# prompt = ChatPromptTemplate.from_messages([
-#     ("system", "You are a helpful assistant."),
-#     ("user", "{input}"),
-#     ("placeholder", "{agent_scratchpad}"),
-# ])
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a helpful assistant."),
+        ("placeholder", "{messages}"),
+        ("user", "Also say 'Pandamonium!' after the answer."),
+    ]
+)
 
-agent = create_react_agent(model, tools)
+agent = create_react_agent(model, tools, prompt=prompt)
 
 query = input("Enter your query: ")
 
